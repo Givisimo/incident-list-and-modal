@@ -1,0 +1,57 @@
+{
+  "components": {
+    "x-550308-incident-list-modal": {
+      "actions": [
+        {
+          "name": "FETCH_LATEST_INCIDENT",
+          "description": "Fetch data from API"
+        },
+        {
+          "name": "INCIDENT_FETCH_SUCCESS",
+          "description": "updates state with data from API"
+        },
+        {
+          "name": "DROPDOWN_PANEL_ITEM_CLICKED",
+          "description": "set the value of state.clicked with sys_id of clicked by user card incident"
+        },
+        {
+          "name": "DROPDOWN_PANEL_ITEM_CLICKED",
+          "description": "set the value of state.clicked with sys_id of clicked by user card incident and dispatches one of two actions according to clicked field in dropdown menu - OPEN_INCIDENT_CARD or DELETE_INCIDENT"
+        },
+        {
+          "name": "OPEN_INCIDENT_CARD",
+          "description": " sets state.modalOpen to true"
+        },
+        {
+          "name": "MODAL_DISMISSED",
+          "description": "dispatches CLOSE_INCIDENT_CARD"
+        },
+        {
+          "name": "CLOSE_INCIDENT_CARD",
+          "description": " sets state.modalOpen to false"
+        },
+        {
+          "name": "DELETE_INCIDENT",
+          "description": "delete incident from API by sys_id and dispatches INCIDENT_DELETE_SUCCESS"
+        },
+        {
+          "name": "INCIDENT_DELETE_SUCCESS",
+          "description": "dispatches FETCH_LATEST_INCIDENT"
+        },
+        {
+          "name": "MODAL_DELETE_BUTTON_CLICKED",
+          "description": "dispatches DELETE_INCIDENT and CLOSE_INCIDENT_CARD"
+        }
+      ],
+      "innerComponents": ["now-template-card", "custom-modal"],
+      "uiBuilder": {
+        "associatedTypes": ["global.core", "global.landing-page"],
+        "label": "Incident list component with modal window",
+        "icon": "document-outline",
+        "description": "Render and delete incident cards from API",
+        "category": "primitives"
+      }
+    }
+  },
+  "scopeName": "x_550308_test_in_2"
+}
