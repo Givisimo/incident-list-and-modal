@@ -3,11 +3,11 @@
     "x-550308-incident-list-modal": {
       "actions": [
         {
-          "name": "FETCH_LATEST_INCIDENT",
+          "name": "FETCH_LATEST_INCIDENT_STARTED",
           "description": "Fetch data from API"
         },
         {
-          "name": "INCIDENT_FETCH_SUCCESS",
+          "name": "INCIDENT_FETCH_SUCCEEDED",
           "description": "updates state with data from API"
         },
         {
@@ -16,31 +16,31 @@
         },
         {
           "name": "DROPDOWN_PANEL_ITEM_CLICKED",
-          "description": "set the value of state.clicked with sys_id of clicked by user card incident and dispatches one of two actions according to clicked field in dropdown menu - OPEN_INCIDENT_CARD or DELETE_INCIDENT"
+          "description": "set the value of state.clicked with sys_id of clicked by user card incident and dispatches one of two actions according to clicked field in dropdown menu - INCIDENT_CARD_OPENED or INCIDENT_DELETE_STARTED"
         },
         {
-          "name": "OPEN_INCIDENT_CARD",
+          "name": "INCIDENT_CARD_OPENED",
           "description": " sets state.modalOpen to true"
         },
         {
           "name": "MODAL_DISMISSED",
-          "description": "dispatches CLOSE_INCIDENT_CARD"
+          "description": "dispatches INCIDENT_CARD_CLOSED"
         },
         {
-          "name": "CLOSE_INCIDENT_CARD",
+          "name": "INCIDENT_CARD_CLOSED",
           "description": " sets state.modalOpen to false"
         },
         {
-          "name": "DELETE_INCIDENT",
-          "description": "delete incident from API by sys_id and dispatches INCIDENT_DELETE_SUCCESS"
+          "name": "INCIDENT_DELETE_STARTED",
+          "description": "delete incident from API by sys_id and dispatches INCIDENT_DELETE_SUCCEEDED"
         },
         {
-          "name": "INCIDENT_DELETE_SUCCESS",
+          "name": "INCIDENT_DELETE_SUCCEEDED",
           "description": "dispatches FETCH_LATEST_INCIDENT"
         },
         {
           "name": "MODAL_DELETE_BUTTON_CLICKED",
-          "description": "dispatches DELETE_INCIDENT and CLOSE_INCIDENT_CARD"
+          "description": "dispatches INCIDENT_DELETE_STARTED and INCIDENT_CARD_CLOSED"
         }
       ],
       "innerComponents": ["now-template-card", "custom-modal"],

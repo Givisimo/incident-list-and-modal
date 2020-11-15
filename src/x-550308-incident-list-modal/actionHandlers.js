@@ -1,24 +1,25 @@
 import { actionTypes } from '@servicenow/ui-core';
 import {
-  INCIDENT_FETCH_SUCCESS,
-  FETCH_LATEST_INCIDENT,
+  INCIDENT_FETCH_SUCCEEDED,
+  FETCH_LATEST_INCIDENT_STARTED,
   DROPDOWN_PANEL_ITEM_CLICKED,
   nowCardActionsId,
-  OPEN_INCIDENT_CARD,
-  DELETE_INCIDENT,
-  CLOSE_INCIDENT_CARD,
-  INCIDENT_DELETE_SUCCESS,
+  INCIDENT_CARD_OPENED,
+  INCIDENT_DELETE_STARTED,
+  INCIDENT_CARD_CLOSED,
+  INCIDENT_DELETE_SUCCEEDED,
   MODAL_DISMISSED,
 } from './constants';
 import { deleteIncident, getIncidents } from './httpEffects';
 const { COMPONENT_BOOTSTRAPPED } = actionTypes;
 
 export const actionHandlers = {
-  [COMPONENT_BOOTSTRAPPED]: ({ dispatch }) => dispatch(FETCH_LATEST_INCIDENT),
+  [COMPONENT_BOOTSTRAPPED]: ({ dispatch }) =>
+    dispatch(FETCH_LATEST_INCIDENT_STARTED),
 
-  [FETCH_LATEST_INCIDENT]: getIncidents,
+  [FETCH_LATEST_INCIDENT_STARTED]: getIncidents,
 
-  [INCIDENT_FETCH_SUCCESS]: ({ action, updateState }) => {
+  [INCIDENT_FETCH_SUCCEEDED]: ({ action, updateState }) => {
     const { result } = action.payload;
     updateState({ incidents: result });
   },
@@ -30,17 +31,19 @@ export const actionHandlers = {
       incidentItem: incidents.find(({ sys_id }) => sys_id === clicked),
     });
     payload.item.id === nowCardActionsId.open
-      ? dispatch(OPEN_INCIDENT_CARD)
-      : dispatch(DELETE_INCIDENT, { sys_id: clicked });
+      ? dispatch(INCIDENT_CARD_OPENED)
+      : dispatch(INCIDENT_DELETE_STARTED, { sys_id: clicked });
   },
 
-  [OPEN_INCIDENT_CARD]: ({ updateState }) => updateState({ modalOpen: true }),
+  [INCIDENT_CARD_OPENED]: ({ updateState }) => updateState({ modalOpen: true }),
 
-  [MODAL_DISMISSED]: ({ dispatch }) => dispatch(CLOSE_INCIDENT_CARD),
+  [MODAL_DISMISSED]: ({ dispatch }) => dispatch(INCIDENT_CARD_CLOSED),
 
-  [CLOSE_INCIDENT_CARD]: ({ updateState }) => updateState({ modalOpen: false }),
+  [INCIDENT_CARD_CLOSED]: ({ updateState }) =>
+    updateState({ modalOpen: false }),
 
-  [DELETE_INCIDENT]: deleteIncident,
+  [INCIDENT_DELETE_STARTED]: deleteIncident,
 
-  [INCIDENT_DELETE_SUCCESS]: ({ dispatch }) => dispatch(FETCH_LATEST_INCIDENT),
+  [INCIDENT_DELETE_SUCCEEDED]: ({ dispatch }) =>
+    dispatch(FETCH_LATEST_INCIDENT_STARTED),
 };
